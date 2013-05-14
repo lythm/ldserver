@@ -58,6 +58,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImportLibrary>..\..\lib\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -79,6 +80,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\core\CoreApi.h" />
+    <ClInclude Include="..\..\include\core\core_all.h" />
+    <ClInclude Include="..\..\include\core\core_ptr.h" />
     <ClInclude Include="core_pch.h" />
   </ItemGroup>
   <ItemGroup>

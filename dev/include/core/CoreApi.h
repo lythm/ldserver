@@ -2,11 +2,16 @@
 
 namespace ldserver
 {
-	class CoreApi
+	class _DLL_CLASS CoreApi
 	{
 	public:
 		CoreApi(void);
-		~CoreApi(void);
+		virtual ~CoreApi(void);
+
+
+		bool											Initialize();
+		void											Release();
+		void											Update();
 	};
 
 

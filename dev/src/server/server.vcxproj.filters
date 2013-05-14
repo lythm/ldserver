@@ -24,9 +24,15 @@
     <ClCompile Include="ServerApp.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="server_pch.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ServerApp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="server_pch.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -11,5 +11,14 @@ namespace ldserver
 	CoreApi::~CoreApi(void)
 	{
 	}
-
+	bool CoreApi::Initialize()
+	{
+		return true;
+	}
+	void CoreApi::Release()
+	{
+	}
+	void CoreApi::Update()
+	{
+	}
 }

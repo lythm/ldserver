@@ -13,9 +13,14 @@ namespace ldserver
 		void											Run();
 
 	private:
-		void											MainLoop();
-		bool											AppInit();
-		void											AppRelease();
+		virtual void									MainLoop();
+		virtual bool									AppInit();
+		virtual void									AppRelease();
+
+
+
+	private:
+		CoreApiPtr										m_pCoreApi;
 	};
 
 

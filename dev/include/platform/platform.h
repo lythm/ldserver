@@ -20,7 +20,7 @@
 #include <process.h>
 
 
-#ifndef _WINDLL
+#ifndef _USRDLL
 
 #define _DLL_API									extern"C" __declspec(dllimport)
 #define _DLL_CLASS									__declspec(dllimport)
