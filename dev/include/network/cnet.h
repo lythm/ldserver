@@ -20,12 +20,13 @@
 #endif
 
 
-typedef void (*cnet_handler)(struct cnet_inst* net, struct cnet_fd* fd, unsigned int op, unsigned int error);
+typedef void (*cnet_handler)(struct cnet* net, struct cnet_fd* fd, unsigned int op, unsigned int error);
 
 
-struct cnet_inst
+struct cnet
 {
 	int				inst;
+	int				max_fd;
 };
 
 struct cnet_fd
@@ -52,8 +53,8 @@ enum
 
 
 
-_CNET_API unsigned int		cnet_init(struct cnet_inst* net);
-_CNET_API void				cnet_fin(struct cnet_inst* net);
+_CNET_API int				cnet_init(int max_fd);
+_CNET_API void				cnet_fin(int cnet);
 
 _CNET_API void				cnet_listen(struct cnet_inst* net, struct cnet_fd* fd);
 

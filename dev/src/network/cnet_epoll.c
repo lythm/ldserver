@@ -2,17 +2,26 @@
 
 #ifdef __linux__
 
+#include <sys/socket.h>
+#include <sys/epoll.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <errno.h>
 
-
-unsigned int		cnet_init(struct cnet_inst* net)
+int					cnet_init(int max_fd)
 {
+	int epfd = -1;
 
-	return 0;
+	epfd = epoll_create(max_fd + 1);
+
+	return epfd;
 }
-void				cnet_fin(struct cnet_inst* net)
+void				cnet_fin(int cnet)
 {
-
-	
+	close(cnet);
 }
 
 void				cnet_listen(struct cnet_inst* net, struct cnet_fd* fd)

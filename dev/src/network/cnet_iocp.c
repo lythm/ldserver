@@ -4,12 +4,12 @@
 
 
 
-unsigned int		cnet_init(struct cnet_inst* net)
+unsigned int		cnet_init(int max_fd)
 {
 
 	return 0;
 }
-void				cnet_fin(struct cnet_inst* net)
+void				cnet_fin(int cnet)
 {
 
 	
