@@ -1,5 +1,5 @@
 
-#include "cnet.h"
+#include "network/cnet.h"
 
 
 #ifdef __FreeBSD__ 

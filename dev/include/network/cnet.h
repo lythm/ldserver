@@ -5,11 +5,18 @@
 #define __CNET_HEADER__
 
 
+#if defined(_WIN32) || defined(_WIN64)
 #ifdef _USRDLL
 
 #define _CNET_API									__declspec(dllexport)
 #else
 #define _CNET_API									__declspec(dllimport)
+#endif
+#endif
+
+#ifdef __linux__
+
+#define _CNET_API
 #endif
 
 

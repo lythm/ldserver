@@ -80,7 +80,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="cnet.c" />
     <ClCompile Include="cnet_epoll.c" />
     <ClCompile Include="cnet_iocp.c" />
     <ClCompile Include="cnet_kq.c" />

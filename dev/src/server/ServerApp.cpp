@@ -21,11 +21,11 @@ namespace ldserver
 			return;
 		}
 
-		printf("server started.");
+		printf("server started.\n");
 
 		MainLoop();
 
-		printf("server stopped.");
+		printf("server stopped.\n");
 
 		AppRelease();
 	}

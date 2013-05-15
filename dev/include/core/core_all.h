@@ -1,14 +1,14 @@
 #pragma once
 
-#include <boost\smart_ptr.hpp>
+#include <boost/smart_ptr.hpp>
 
 
 
-#include "platform\platform.h"
+#include "platform/platform.h"
 
-#include "core\core_ptr.h"
+#include "core/core_ptr.h"
 
-#include "core\CoreApi.h"
+#include "core/CoreApi.h"
 
 
 

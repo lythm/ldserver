@@ -1,5 +1,5 @@
 #include "core_pch.h"
-#include "..\..\include\core\CoreApi.h"
+#include "core/CoreApi.h"
 
 namespace ldserver
 {

@@ -1,0 +1,21 @@
+PROJECT(server)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+AUX_SOURCE_DIRECTORY(./ DIR_SRCS)
+
+LINK_DIRECTORIES(../../lib)
+LINK_DIRECTORIES(../../external/boost/stage/lib)
+
+INCLUDE_DIRECTORIES(../../include)
+INCLUDE_DIRECTORIES(../../external/boost)
+
+SET(EXECUTABLE_OUTPUT_PATH ../../bin)
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ldl")
+
+ADD_EXECUTABLE(server ${DIR_SRCS})
+
+TARGET_LINK_LIBRARIES(server libboost_filesystem.a)
+TARGET_LINK_LIBRARIES(server libboost_system.a)
+TARGET_LINK_LIBRARIES(server platform)
+TARGET_LINK_LIBRARIES(server network)
+TARGET_LINK_LIBRARIES(server core)
+
