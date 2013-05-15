@@ -22,6 +22,4 @@ namespace ldserver
 	private:
 		CoreApiPtr										m_pCoreApi;
 	};
-
-
 }

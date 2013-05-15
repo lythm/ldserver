@@ -3,6 +3,8 @@
 
 #include "platform/platform.h"
 
+#include "network/Network.h"
+
 namespace ldserver
 {
 	ServerApp::ServerApp(void)
@@ -47,10 +49,12 @@ namespace ldserver
 		{
 			return false;
 		}
+
 		return true;
 	}
 	void ServerApp::AppRelease()
 	{
+
 
 		if(m_pCoreApi)
 		{

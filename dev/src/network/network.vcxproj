@@ -80,12 +80,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="cnet_epoll.c" />
-    <ClCompile Include="cnet_iocp.c" />
-    <ClCompile Include="cnet_kq.c" />
+    <ClCompile Include="network_linux.cpp" />
+    <ClCompile Include="network_win.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\network\cnet.h" />
+    <ClInclude Include="..\..\include\network\Network.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

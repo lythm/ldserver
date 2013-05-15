@@ -15,18 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="cnet_epoll.c">
+    <ClCompile Include="network_win.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="cnet_iocp.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="cnet_kq.c">
+    <ClCompile Include="network_linux.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\network\cnet.h">
+    <ClInclude Include="..\..\include\network\Network.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
