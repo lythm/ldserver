@@ -15,15 +15,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="network_win.cpp">
+    <ClCompile Include="Network_BoostASIO.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="network_linux.cpp">
+    <ClCompile Include="Network_Epoll.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\network\Network.h">
+    <ClInclude Include="Network_BoostASIO.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Network_Epoll.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

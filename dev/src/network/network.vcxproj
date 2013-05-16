@@ -80,11 +80,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="network_linux.cpp" />
-    <ClCompile Include="network_win.cpp" />
+    <ClCompile Include="Network_BoostASIO.cpp" />
+    <ClCompile Include="Network_Epoll.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\network\Network.h" />
+    <ClInclude Include="Network_BoostASIO.h" />
+    <ClInclude Include="Network_Epoll.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

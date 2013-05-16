@@ -83,8 +83,17 @@ namespace ldserver
 #ifdef __linux__
 	typedef long long								int64;
 	typedef unsigned long long						uint64;
+
+	#ifndef nullptr
+	#define nullptr NULL
+	#endif
+
 #endif
 }
+
+
+
+
 
 namespace ldserver
 {

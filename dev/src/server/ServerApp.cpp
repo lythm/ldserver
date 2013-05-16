@@ -3,7 +3,7 @@
 
 #include "platform/platform.h"
 
-#include "network/Network.h"
+#include "core/Network.h"
 
 namespace ldserver
 {

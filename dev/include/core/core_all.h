@@ -1,7 +1,7 @@
 #pragma once
 
 #include <boost/smart_ptr.hpp>
-
+#include <boost/asio.hpp>
 
 
 #include "platform/platform.h"
