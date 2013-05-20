@@ -5,14 +5,31 @@
 
 
 #include "core/Network.h"
-#include <boost/asio.hpp>
-
 
 namespace ldserver
 {
 	class Network_BoostASIO : public Network
 	{
 	public:
+
+		struct _acceptor_asio : public _acceptor
+		{
+			_acceptor_asio(boost::asio::io_service io) : _acceptor(io)
+			{
+
+			}
+			boost::asio::ip::tcp::endpoint						_ep;
+			boost::asio::ip::tcp::acceptor						_acceptor;
+
+			op_handler											_handler;
+			op_context											_context;
+		};
+
+		struct _socket_asio : public _socket
+		{
+
+		};
+
 		Network_BoostASIO(void);
 		virtual ~Network_BoostASIO(void);
 
@@ -20,14 +37,21 @@ namespace ldserver
 		void													Release();
 		void													Update();
 
-		bool													Listen(const listener& l);
+		acceptor_ptr											Accept(const boost::asio::ip::address& addr, 
+																					uint32 port,
+																					uint32 max_client,
+																					op_handler handler);
 
+	private:
+		void													start_accept(accept_ptr acc);
+		void													_on_accept(socket_ptr sock, const boost::system::error_code& error);
 
 	private:
 		boost::asio::io_service									m_io;
+
+		acceptor_ptr											m_acceptors;
+		
 	};
-
-
 }
 
 #endif
