@@ -1,6 +1,7 @@
 #if defined(_WIN32) || defined(_WIN64)
 
 #include "Network_BoostASIO.h"
+#include "boost/bind.hpp"
 
 namespace ldserver
 {
@@ -61,9 +62,11 @@ namespace ldserver
 	{
 		using namespace boost::asio::ip;
 
-		_socket_asio* sock = new _socket_asio;
+		_socket_asio* sock = new _socket_asio(m_io);
 		
+		//sock->_sock = 
 
+		((_acceptor_asio*)acc.get())->_acceptor.async_accept(sock->_sock, boost::bind(&Network_BoostASIO::_on_accept, this, socket_ptr(sock), _1));
 
 	}
 }

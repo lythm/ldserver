@@ -14,7 +14,7 @@ namespace ldserver
 
 		struct _acceptor_asio : public _acceptor
 		{
-			_acceptor_asio(boost::asio::io_service io) : _acceptor(io)
+			_acceptor_asio(boost::asio::io_service& io) : _acceptor(io)
 			{
 
 			}
@@ -27,6 +27,10 @@ namespace ldserver
 
 		struct _socket_asio : public _socket
 		{
+			_socket_asio(boost::asio::io_service& io) : _sock(io)
+			{
+			}
+			boost::asio::ip::tcp::socket						_sock;
 
 		};
 
@@ -43,7 +47,7 @@ namespace ldserver
 																					op_handler handler);
 
 	private:
-		void													start_accept(accept_ptr acc);
+		void													start_accept(acceptor_ptr acc);
 		void													_on_accept(socket_ptr sock, const boost::system::error_code& error);
 
 	private:

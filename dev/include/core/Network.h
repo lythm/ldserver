@@ -24,6 +24,11 @@ namespace ldserver
 
 		struct _socket : public Linked<_socket>
 		{
+			_socket()
+			{
+				_remote_addr.from_string("0.0.0.0");
+				_port = 0;
+			}
 			boost::asio::ip::address									_remote_addr;
 			uint32														_port;
 		};
@@ -59,7 +64,6 @@ namespace ldserver
 		struct op_context
 		{
 			op_code														_op;
-			socket_ptr													_sock;
 			void*														_handler_context;
 		};
 
