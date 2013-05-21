@@ -41,11 +41,16 @@ namespace ldserver
 		void													Release();
 		void													Update();
 
-		acceptor_ptr											Accept(const boost::asio::ip::address& addr, 
+		acceptor_ptr											Listen(const boost::asio::ip::address& addr, 
 																					uint32 port,
 																					uint32 max_client,
 																					op_handler handler);
 
+		socket_ptr												Connect(const boost::asio::ip::address& addr, uint32 port);
+		void													Recv(socket_ptr sock, op_handler handler);
+		void													Send(socket_ptr sock, op_handler handler);
+		void													Close(acceptor_ptr acc);
+		void													Close(socket_ptr sock);
 	private:
 		void													start_accept(acceptor_ptr acc);
 		void													_on_accept(acceptor_ptr acc, socket_ptr sock, const boost::system::error_code& error);

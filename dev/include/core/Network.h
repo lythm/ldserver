@@ -66,6 +66,7 @@ namespace ldserver
 			op_code														_op;
 			void*														_handler_context;
 			uint64														_error;
+			socket_ptr													_sock;
 		};
 
 		typedef boost::function<void (op_context*)>						op_handler;
@@ -75,14 +76,15 @@ namespace ldserver
 		virtual void													Release()						= 0;
 		virtual void													Update()						= 0;
 
-		virtual acceptor_ptr											Accept(const boost::asio::ip::address& addr, 
+		virtual acceptor_ptr											Listen(const boost::asio::ip::address& addr, 
 																					uint32 port,
 																					uint32 max_client,
 																					op_handler handler)	= 0;
 
 		//virtual void													Connect()						= 0;
 		//virtual void													Send()							= 0;
-		//virtual void													Close()							= 0;
+		virtual void													Close(acceptor_ptr acc)			= 0;
+		virtual void													Close(socket_ptr sock)			= 0;
 
 
 	protected:

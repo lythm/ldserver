@@ -26,7 +26,7 @@ namespace ldserver
 	{
 		m_io.poll();
 	}
-	Network_BoostASIO::acceptor_ptr	Network_BoostASIO::Accept(const boost::asio::ip::address& addr, uint32 port, uint32 max_client, op_handler handler)
+	Network_BoostASIO::acceptor_ptr	Network_BoostASIO::Listen(const boost::asio::ip::address& addr, uint32 port, uint32 max_client, op_handler handler)
 	{
 		using namespace boost::asio::ip;
 		
@@ -49,15 +49,15 @@ namespace ldserver
 		acc->_acceptor.listen();
 		
 
-		m_acceptors = acc;
-		/*if(m_acceptors == nullptr)
+		
+		if(m_acceptors == nullptr)
 		{
 			m_acceptors = acceptor_ptr(acc);
 		}
 		else
 		{
 			_acceptor::Insert(m_acceptors, acceptor_ptr(acc));
-		}*/
+		}
 
 		start_accept(acc);
 		
@@ -67,19 +67,31 @@ namespace ldserver
 	{
 		using namespace boost;
 
+
+		shared_ptr<_acceptor_asio> pa = dynamic_pointer_cast<_acceptor_asio>(acc);
+
+
 		if(error)
 		{
 			std::cout << error.message() << std::endl;
+			
+
+			pa->_context._error = error.value();
+			pa->_context._op = op_abort;
+			pa->_context._sock = sock;
+			pa->_handler(&pa->_context);
+			
+			Close(sock);
+
 			start_accept(acc);
 			return;
 		}
 
 		std::cout << "new conn" << std::endl;
 
-		shared_ptr<_acceptor_asio> pa = dynamic_pointer_cast<_acceptor_asio>(acc);
-
 		pa->_context._error = error.value();
 		pa->_context._op = op_accept;
+		pa->_context._sock = sock;
 		pa->_handler(&pa->_context);
 
 		start_accept(acc);
@@ -90,9 +102,71 @@ namespace ldserver
 
 		boost::shared_ptr<_socket_asio> sock = boost::shared_ptr<_socket_asio>(new _socket_asio(m_io));
 		
-		m_socks = sock;
+		if(m_socks == nullptr)
+		{
+			m_socks = sock;
+		}
+		else
+		{
+			_socket::Insert(m_socks, sock);
+		}
 
 		((_acceptor_asio*)acc.get())->_acceptor.async_accept(sock->_sock, boost::bind(&Network_BoostASIO::_on_accept, this, acc, sock, boost::asio::placeholders::error));
+	}
+	void Network_BoostASIO::Close(acceptor_ptr acc)
+	{
+		using namespace boost;
+		if(acc == nullptr)
+		{
+			return;
+		}
+		shared_ptr<_acceptor_asio> pa = dynamic_pointer_cast<_acceptor_asio>(acc);
+
+		pa->_acceptor.close();
+
+		pa->Unlink();
+
+	}
+	void Network_BoostASIO::Close(socket_ptr sock)
+	{
+		using namespace boost;
+
+		if(sock == nullptr)
+		{
+			return;
+		}
+		shared_ptr<_socket_asio> p_sock = dynamic_pointer_cast<_socket_asio>(sock);
+		p_sock->_sock.close();
+
+		sock->Unlink();
+	}
+	Network_BoostASIO::socket_ptr Network_BoostASIO::Connect(const boost::asio::ip::address& addr, uint32 port)
+	{
+		using namespace boost::asio::ip;
+
+		boost::shared_ptr<_socket_asio> sock = boost::shared_ptr<_socket_asio>(new _socket_asio(m_io));
+		
+		if(m_socks == nullptr)
+		{
+			m_socks = sock;
+		}
+		else
+		{
+			_socket::Insert(m_socks, sock);
+		}
+
+		sock->_sock.connect(tcp::endpoint(addr, port));
+
+		return sock;
+	}
+	void Network_BoostASIO::Recv(socket_ptr sock, op_handler handler)
+	{
+		boost::shared_ptr<_socket_asio> asock = boost::dynamic_pointer_cast<_socket_asio>(sock);
+		//asock->_sock.async_receive(
+	}
+	void Network_BoostASIO::Send(socket_ptr sock, op_handler handler)
+	{
+		boost::shared_ptr<_socket_asio> asock = boost::dynamic_pointer_cast<_socket_asio>(sock);
 	}
 }
 
