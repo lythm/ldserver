@@ -65,6 +65,7 @@ namespace ldserver
 		{
 			op_code														_op;
 			void*														_handler_context;
+			uint64														_error;
 		};
 
 		typedef boost::function<void (op_context*)>						op_handler;
@@ -79,9 +80,9 @@ namespace ldserver
 																					uint32 max_client,
 																					op_handler handler)	= 0;
 
-		virtual void													Connect()						= 0;
-		virtual void													Send()							= 0;
-		virtual void													Close()							= 0;
+		//virtual void													Connect()						= 0;
+		//virtual void													Send()							= 0;
+		//virtual void													Close()							= 0;
 
 
 	protected:

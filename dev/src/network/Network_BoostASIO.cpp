@@ -16,8 +16,6 @@ namespace ldserver
 	}
 	bool Network_BoostASIO::Initialize()
 	{
-		
-		
 		return true;
 	}
 	void Network_BoostASIO::Release()
@@ -32,7 +30,7 @@ namespace ldserver
 	{
 		using namespace boost::asio::ip;
 		
-		_acceptor_asio* acc = new _acceptor_asio(m_io);
+		boost::shared_ptr<_acceptor_asio> acc = boost::shared_ptr<_acceptor_asio>(new _acceptor_asio(m_io));
 
 		acc->_addr = addr;
 		acc->_port = port;
@@ -50,24 +48,51 @@ namespace ldserver
 		acc->_acceptor.bind(acc->_ep);
 		acc->_acceptor.listen();
 		
-		start_accept(acceptor_ptr(acc));
-		
-		return acceptor_ptr(acc);
-	}
-	void Network_BoostASIO::_on_accept(socket_ptr sock, const boost::system::error_code& error)
-	{
 
+		m_acceptors = acc;
+		/*if(m_acceptors == nullptr)
+		{
+			m_acceptors = acceptor_ptr(acc);
+		}
+		else
+		{
+			_acceptor::Insert(m_acceptors, acceptor_ptr(acc));
+		}*/
+
+		start_accept(acc);
+		
+		return acc;
+	}
+	void Network_BoostASIO::_on_accept(acceptor_ptr acc, socket_ptr sock, const boost::system::error_code& error)
+	{
+		using namespace boost;
+
+		if(error)
+		{
+			std::cout << error.message() << std::endl;
+			start_accept(acc);
+			return;
+		}
+
+		std::cout << "new conn" << std::endl;
+
+		shared_ptr<_acceptor_asio> pa = dynamic_pointer_cast<_acceptor_asio>(acc);
+
+		pa->_context._error = error.value();
+		pa->_context._op = op_accept;
+		pa->_handler(&pa->_context);
+
+		start_accept(acc);
 	}
 	void Network_BoostASIO::start_accept(acceptor_ptr acc)
 	{
 		using namespace boost::asio::ip;
 
-		_socket_asio* sock = new _socket_asio(m_io);
+		boost::shared_ptr<_socket_asio> sock = boost::shared_ptr<_socket_asio>(new _socket_asio(m_io));
 		
-		//sock->_sock = 
+		m_socks = sock;
 
-		((_acceptor_asio*)acc.get())->_acceptor.async_accept(sock->_sock, boost::bind(&Network_BoostASIO::_on_accept, this, socket_ptr(sock), _1));
-
+		((_acceptor_asio*)acc.get())->_acceptor.async_accept(sock->_sock, boost::bind(&Network_BoostASIO::_on_accept, this, acc, sock, boost::asio::placeholders::error));
 	}
 }
 

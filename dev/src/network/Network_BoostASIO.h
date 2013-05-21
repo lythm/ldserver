@@ -8,7 +8,7 @@
 
 namespace ldserver
 {
-	class Network_BoostASIO : public Network
+	class _DLL_CLASS Network_BoostASIO : public Network
 	{
 	public:
 
@@ -48,12 +48,13 @@ namespace ldserver
 
 	private:
 		void													start_accept(acceptor_ptr acc);
-		void													_on_accept(socket_ptr sock, const boost::system::error_code& error);
+		void													_on_accept(acceptor_ptr acc, socket_ptr sock, const boost::system::error_code& error);
 
 	private:
 		boost::asio::io_service									m_io;
 
 		acceptor_ptr											m_acceptors;
+		socket_ptr												m_socks;
 		
 	};
 }
