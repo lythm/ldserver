@@ -159,12 +159,14 @@ namespace ldserver
 
 		return sock;
 	}
-	void Network_BoostASIO::Recv(socket_ptr sock, op_handler handler)
+	void Network_BoostASIO::Recv(socket_ptr sock, void* buffer, uint32 bytes, op_handler handler)
 	{
 		boost::shared_ptr<_socket_asio> asock = boost::dynamic_pointer_cast<_socket_asio>(sock);
+
+		//asock->_sock.async_receive(boost::asio::buffer(buffer, bytes), 0, handler);
 		//asock->_sock.async_receive(
 	}
-	void Network_BoostASIO::Send(socket_ptr sock, op_handler handler)
+	void Network_BoostASIO::Send(socket_ptr sock, void* buffer, uint32 bytes, op_handler handler)
 	{
 		boost::shared_ptr<_socket_asio> asock = boost::dynamic_pointer_cast<_socket_asio>(sock);
 	}

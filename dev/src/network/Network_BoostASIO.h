@@ -47,8 +47,8 @@ namespace ldserver
 																					op_handler handler);
 
 		socket_ptr												Connect(const boost::asio::ip::address& addr, uint32 port);
-		void													Recv(socket_ptr sock, op_handler handler);
-		void													Send(socket_ptr sock, op_handler handler);
+		void													Recv(socket_ptr sock, void* buffer, uint32 bytes, op_handler handler);
+		void													Send(socket_ptr sock, void* buffer, uint32 bytes, op_handler handler);
 		void													Close(acceptor_ptr acc);
 		void													Close(socket_ptr sock);
 	private:
