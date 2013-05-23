@@ -2,8 +2,15 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "core", "src\core\core.vcxproj", "{C3149615-5980-4C63-B4A9-0EC78EA62A17}"
+	ProjectSection(ProjectDependencies) = postProject
+		{408C52C6-0560-4FDE-A20E-9D4DB19119D6} = {408C52C6-0560-4FDE-A20E-9D4DB19119D6}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "network", "src\network\network.vcxproj", "{F7742AAD-9243-46C3-998C-6F8D674E04DC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C3149615-5980-4C63-B4A9-0EC78EA62A17} = {C3149615-5980-4C63-B4A9-0EC78EA62A17}
+		{408C52C6-0560-4FDE-A20E-9D4DB19119D6} = {408C52C6-0560-4FDE-A20E-9D4DB19119D6}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "server", "src\server\server.vcxproj", "{5F41890A-4CCE-46A8-A926-B874D20AFFFC}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -13,6 +20,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "server", "src\server\server
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "platform", "src\platform\platform.vcxproj", "{408C52C6-0560-4FDE-A20E-9D4DB19119D6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mod_echoserver", "src\mod_echoserver\mod_echoserver.vcxproj", "{AB1BAEC2-CA9A-4769-A7E3-34D845717149}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +45,10 @@ Global
 		{408C52C6-0560-4FDE-A20E-9D4DB19119D6}.Debug|Win32.Build.0 = Debug|Win32
 		{408C52C6-0560-4FDE-A20E-9D4DB19119D6}.Release|Win32.ActiveCfg = Release|Win32
 		{408C52C6-0560-4FDE-A20E-9D4DB19119D6}.Release|Win32.Build.0 = Release|Win32
+		{AB1BAEC2-CA9A-4769-A7E3-34D845717149}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AB1BAEC2-CA9A-4769-A7E3-34D845717149}.Debug|Win32.Build.0 = Debug|Win32
+		{AB1BAEC2-CA9A-4769-A7E3-34D845717149}.Release|Win32.ActiveCfg = Release|Win32
+		{AB1BAEC2-CA9A-4769-A7E3-34D845717149}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

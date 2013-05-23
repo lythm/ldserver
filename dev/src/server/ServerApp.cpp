@@ -4,6 +4,8 @@
 #include "platform/platform.h"
 
 #include "core/Network.h"
+#include "ModManager.h"
+
 
 namespace ldserver
 {
@@ -38,6 +40,7 @@ namespace ldserver
 			
 			m_pCoreApi->Update();
 
+			m_pModManager->Update();
 
 			ldserver::sleep(1);
 		}
@@ -50,11 +53,22 @@ namespace ldserver
 			return false;
 		}
 
+		m_pModManager = ModManagerPtr(new ModManager);
+
+		if(m_pModManager->Initialize(m_pCoreApi, "./mod_echoserver.dll") == false)
+		{
+			return false;
+		}
+
 		return true;
 	}
 	void ServerApp::AppRelease()
 	{
-
+		if(m_pModManager)
+		{
+			m_pModManager->Release();
+			m_pModManager.reset();
+		}
 
 		if(m_pCoreApi)
 		{

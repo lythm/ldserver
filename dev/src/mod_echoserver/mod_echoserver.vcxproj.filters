@@ -15,34 +15,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
+    <ClInclude Include="mod_echo_pch.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="EchoServer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="server.cpp">
+    <ClCompile Include="mod_echo_pch.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="ServerApp.cpp">
+    <ClCompile Include="EchoServer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="server_pch.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="ModManager.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="ServerApp.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="server_pch.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ModManager.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\core\Mod.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

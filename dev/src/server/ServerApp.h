@@ -1,6 +1,7 @@
 #pragma once
 
 
+
 namespace ldserver
 {
 
@@ -21,5 +22,7 @@ namespace ldserver
 
 	private:
 		CoreApiPtr										m_pCoreApi;
+
+		ModManagerPtr									m_pModManager;
 	};
 }

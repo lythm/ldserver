@@ -18,7 +18,7 @@
 
 namespace ldserver
 {
-	class Network
+	class _DLL_CLASS Network
 	{
 	public:
 
