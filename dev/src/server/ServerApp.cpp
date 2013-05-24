@@ -25,11 +25,7 @@ namespace ldserver
 			return;
 		}
 
-		printf("server started.\n");
-
 		MainLoop();
-
-		printf("server stopped.\n");
 
 		AppRelease();
 	}
@@ -55,7 +51,7 @@ namespace ldserver
 
 		m_pModManager = ModManagerPtr(new ModManager);
 
-		if(m_pModManager->Initialize(m_pCoreApi, "./mod_echoserver.dll") == false)
+		if(m_pModManager->Initialize(m_pCoreApi, m_pCoreApi->AppSettings("mod")[0].c_str()) == false)
 		{
 			return false;
 		}

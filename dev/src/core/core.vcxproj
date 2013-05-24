@@ -80,9 +80,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\core\AppConfig.h" />
     <ClInclude Include="..\..\include\core\CoreApi.h" />
     <ClInclude Include="..\..\include\core\core_all.h" />
     <ClInclude Include="..\..\include\core\core_ptr.h" />
+    <ClInclude Include="..\..\include\core\Device.h" />
+    <ClInclude Include="..\..\include\core\DeviceManager.h" />
+    <ClInclude Include="..\..\include\core\device_id.h" />
     <ClInclude Include="..\..\include\core\DLMod.h" />
     <ClInclude Include="..\..\include\core\Linked.h" />
     <ClInclude Include="..\..\include\core\MemPool.h" />
@@ -90,10 +94,12 @@
     <ClInclude Include="core_pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AppConfig.cpp" />
     <ClCompile Include="CoreApi.cpp" />
     <ClCompile Include="core_pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="DLMod.cpp" />
     <ClCompile Include="MemPool.cpp" />
   </ItemGroup>

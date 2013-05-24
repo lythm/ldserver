@@ -37,7 +37,7 @@ namespace ldserver
 		Network_BoostASIO(void);
 		virtual ~Network_BoostASIO(void);
 
-		bool													Initialize();
+		bool													Initialize(CoreApiPtr pCore);
 		void													Release();
 		void													Update();
 

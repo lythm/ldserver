@@ -16,9 +16,12 @@
 
 #include "core/linked.h"
 
+#include "core/Device.h"
+#include "core/device_id.h"
+
 namespace ldserver
 {
-	class _DLL_CLASS Network
+	class _DLL_CLASS Network : public Device
 	{
 	public:
 
@@ -72,7 +75,9 @@ namespace ldserver
 		typedef boost::function<void (op_context*)>						op_handler;
 					
 
-		virtual bool													Initialize()					= 0;
+
+		virtual std::string												GetName(){return "device_network";};
+		virtual bool													Initialize(CoreApiPtr pCore)	= 0;
 		virtual void													Release()						= 0;
 		virtual void													Update()						= 0;
 
@@ -88,7 +93,7 @@ namespace ldserver
 
 
 	protected:
-		Network(void){}
+		Network(void) :Device(dev_network){}
 		virtual ~Network(void){}
 	private:
 

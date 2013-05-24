@@ -12,6 +12,7 @@ EchoServer::~EchoServer(void)
 }
 bool EchoServer::Initialize(ldserver::CoreApiPtr pCoreApi)
 {
+	printf("echo server started.\n");
 	return true;
 }
 EchoServer::update_result EchoServer::Update(ldserver::uint64 tick)

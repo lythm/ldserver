@@ -16,4 +16,13 @@ namespace ldserver
 
 }
 
+_DLL_API ldserver::Device* device_alloc()
+{
+	return new ldserver::Network_Epoll;
+}
+_DLL_API void device_free(ldserver::Device* pDevice)
+{
+	delete (ldserver::Network_Epoll*)pDevice;
+
+}
 #endif

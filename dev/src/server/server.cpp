@@ -38,35 +38,6 @@ int main(int argc, char* argv[])
 {
 	using namespace ldserver;
 
-
-	Network_BoostASIO net;
-
-	net.Initialize();
-
-	boost::asio::ip::address addr;
-
-	Network::acceptor_ptr p_acc;
-
-	try
-	{
-		p_acc = net.Listen(boost::asio::ip::address::from_string("192.168.0.203"), 9118, 10, on_accept);
-
-		for(int i = 0; i < 500000; ++i)
-		{
-			net.Update();
-
-			Sleep(1);
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
-	net.Close(g_sock);
-	net.Close(p_acc);
-
-	net.Release();
-
 	ServerApp app;
 
 	app.Run();

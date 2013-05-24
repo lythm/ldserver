@@ -2,19 +2,21 @@
 
 #include "Network_BoostASIO.h"
 #include "boost/bind.hpp"
+#include "core/core_all.h"
+
 
 namespace ldserver
 {
 	Network_BoostASIO::Network_BoostASIO(void)
 	{
-		
+
 	}
 
 
 	Network_BoostASIO::~Network_BoostASIO(void)
 	{
 	}
-	bool Network_BoostASIO::Initialize()
+	bool Network_BoostASIO::Initialize(CoreApiPtr pCore)
 	{
 		return true;
 	}
@@ -29,7 +31,7 @@ namespace ldserver
 	Network_BoostASIO::acceptor_ptr	Network_BoostASIO::Listen(const boost::asio::ip::address& addr, uint32 port, uint32 max_client, op_handler handler)
 	{
 		using namespace boost::asio::ip;
-		
+
 		boost::shared_ptr<_acceptor_asio> acc = boost::shared_ptr<_acceptor_asio>(new _acceptor_asio(m_io));
 
 		acc->_addr = addr;
@@ -41,15 +43,15 @@ namespace ldserver
 		acc->_handler = handler;
 		acc->_context._handler_context = 0;
 
-		
+
 		acc->_acceptor.open(boost::asio::ip::tcp::v4());
-		
+
 		acc->_acceptor.set_option(boost::asio::ip::tcp::acceptor::reuse_address(true));
 		acc->_acceptor.bind(acc->_ep);
 		acc->_acceptor.listen();
-		
 
-		
+
+
 		if(m_acceptors == nullptr)
 		{
 			m_acceptors = acceptor_ptr(acc);
@@ -60,7 +62,7 @@ namespace ldserver
 		}
 
 		start_accept(acc);
-		
+
 		return acc;
 	}
 	void Network_BoostASIO::_on_accept(acceptor_ptr acc, socket_ptr sock, const boost::system::error_code& error)
@@ -74,13 +76,13 @@ namespace ldserver
 		if(error)
 		{
 			std::cout << error.message() << std::endl;
-			
+
 
 			pa->_context._error = error.value();
 			pa->_context._op = op_abort;
 			pa->_context._sock = sock;
 			pa->_handler(&pa->_context);
-			
+
 			Close(sock);
 
 			start_accept(acc);
@@ -101,7 +103,7 @@ namespace ldserver
 		using namespace boost::asio::ip;
 
 		boost::shared_ptr<_socket_asio> sock = boost::shared_ptr<_socket_asio>(new _socket_asio(m_io));
-		
+
 		if(m_socks == nullptr)
 		{
 			m_socks = sock;
@@ -145,7 +147,7 @@ namespace ldserver
 		using namespace boost::asio::ip;
 
 		boost::shared_ptr<_socket_asio> sock = boost::shared_ptr<_socket_asio>(new _socket_asio(m_io));
-		
+
 		if(m_socks == nullptr)
 		{
 			m_socks = sock;
@@ -171,5 +173,18 @@ namespace ldserver
 		boost::shared_ptr<_socket_asio> asock = boost::dynamic_pointer_cast<_socket_asio>(sock);
 	}
 }
+
+
+
+_DLL_API ldserver::Device* device_alloc()
+{
+	return new ldserver::Network_BoostASIO;
+}
+_DLL_API void device_free(ldserver::Device* pDevice)
+{
+	delete (ldserver::Network_BoostASIO*)pDevice;
+
+}
+
 
 #endif
