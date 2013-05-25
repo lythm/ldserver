@@ -6,7 +6,7 @@
 
 namespace ldserver
 {
-	class Device
+	class _DLL_CLASS Device
 	{
 	public:
 
